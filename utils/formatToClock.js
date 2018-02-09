@@ -3,6 +3,7 @@ const {
   length,
   indexOf,
   __,
+  pipe,
 } = require('ramda');
 
 // eslint-disable-next-line
@@ -90,6 +91,15 @@ const formatToClock = (strCommand) => {
   return hexToBin(formatDados);
 };
 
+const removeSpecialCharacters = hex => hex.slice(6, hex.length - 4);
+const hexToString = hex => Buffer.from(hex, 'hex').toString('utf8');
+
+const formatFromClock = pipe(
+  removeSpecialCharacters,
+  hexToString,
+);
+
 module.exports = {
   formatToClock,
+  formatFromClock,
 };
