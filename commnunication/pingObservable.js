@@ -28,27 +28,6 @@ const PingObservable = (host, port) => {
     });
 };
 
-const host = '192.168.15.53';
-const port = 3000;
-
-const clocks = [
-  { host, port },
-  { host, port },
-  { host, port },
-  { host, port },
-  { host, port },
-  { host, port },
-  { host, port },
-  { host, port },
-];
-
-const sub = Observable.from(clocks)
-  .flatMap(({ host, port }) => {
-    return PingObservable(host, port)
-      .catch(error => Observable.of("error"));
-  })
-  .subscribe({
-    error: e => console.log(e),
-    complete: () => console.log('finished'),
-    next: e => console.log('data', e),
-  });
+module.exports = {
+  PingObservable,
+};

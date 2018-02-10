@@ -1,20 +1,20 @@
 const {
- Subject, Subscription, AnonymousSubject, Observable 
+  Subject, Subscription, AnonymousSubject, Observable,
 } = require('rxjs/Rx');
 const net = require('net');
 const { formatToClock, formatFromClock } = require('../utils/formatToClock');
 
 class SocketSubject extends AnonymousSubject {
   constructor(host, port) {
+    const destination = new Subject();
     const socket = net.createConnection({ host, port });
     socket.setEncoding('HEX');
 
-    const source = Observable.create((observer) => {
-      socket.on('data', data => observer.next(data));
-      socket.on('end', () => observer.complete());
-    });
+    socket.on('data', data => destination.next(data));
+    socket.on('end', () => destination.complete());
+    socket.on('error', err => destination.error(err));
 
-    super(null , source);
+    super(destination, destination);
     this.socket = socket;
   }
   next(hexString) {
@@ -29,12 +29,13 @@ class SocketSubject extends AnonymousSubject {
       this.destination.error(err);
     }
   }
+
   complete() {
-    const { destination } = this;
-    if (destination && destination.complete) {
-      this.destination.complete();
-    }
+    const { socket, destination } = this;
+    socket.end();
+    destination.complete();
   }
+
   _subscribe(subscriber) {
     const { source } = this;
     if (source) {
@@ -42,11 +43,14 @@ class SocketSubject extends AnonymousSubject {
     }
     return Subscription.EMPTY;
   }
+
+  unsubscribe() {
+    const { socket, destination } = this;
+    socket.end();
+    destination.complete();
+  }
 }
 
-const sub = new SocketSubject('192.168.15.53', 3000);
-sub
-  .map(formatFromClock)
-  .subscribe(e => console.log(e));
-sub.next('00+RR+00+N]5]100');
-sub.next('00+RR+00+N]5]100');
+module.exports = {
+  SocketSubject,
+};
