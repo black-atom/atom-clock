@@ -18,6 +18,7 @@ const db = new Sequelize(dialect, username, password, {
     acquire: 30000,
     idle: 10000,
   },
+  logging: false,
 });
 
 /** * Instantiate models ** */
@@ -29,14 +30,24 @@ db.authenticate()
   .then(() => {
     console.log('Successfully connected to the database!');
   })
-  .then(() => {
-    return db.sync({ force: true })
-  })
+  .then(() => db.sync({ force: false }))
   .catch(err => console.log(err));
 
 const getModel = name => db.model(name);
+const isDBReady = async () => {
+  try {
+    await db.authenticate();
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+const getTransaction = () => db.transaction();
 
 module.exports = {
   db,
+  getTransaction,
   getModel,
+  isDBReady,
 };
