@@ -43,9 +43,11 @@ const isDBReady = async () => {
   }
 };
 
+const getTransaction = () => db.transaction();
 
 module.exports = {
   db,
+  getTransaction,
   getModel,
   isDBReady,
 };

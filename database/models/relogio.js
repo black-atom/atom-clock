@@ -18,10 +18,20 @@ module.exports = (db) => {
     isUp: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
+      defaultValue: true,
     },
-    alertAt: {
+    interval: {
       type: Sequelize.INTEGER,
+      defaultValue: 15 * 60000,
+    },
+    errorCount: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
       allowNull: false,
+    },
+    lastTested: {
+      type: Sequelize.DATE,
+      allowNull: true,
     },
   });
 
