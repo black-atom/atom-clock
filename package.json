@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll *.test.js",
-    "lint": "eslint '**/*formatToClock.js'"
+    "lint": "eslint '**/*formatToClock.js'",
+    "ping-app": "node pingApp.js"
   },
   "keywords": [],
   "author": "vitorsilvalima <vitor.lima2@fatec.sp.gov.br>",
