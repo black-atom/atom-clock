@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const { getDBConfig } = require('../config/DBConfig');
 const Relogio = require('./models/relogio');
 const Ping = require('./models/ping');
+const Address = require('./models/address');
 
 const {
   host, username, password, port, dialect,
@@ -22,7 +23,7 @@ const db = new Sequelize(dialect, username, password, {
 });
 
 /** * Instantiate models ** */
-const modelsSchema = [Relogio, Ping];
+const modelsSchema = [Relogio, Ping, Address];
 const modelInstances = modelsSchema.map(schema => schema(db));
 modelInstances.forEach(modelInstance => modelInstance.associate(db.models));
 

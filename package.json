@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll *.test.js",
-    "lint": "eslint '**/*formatToClock.js'",
+    "lint": "eslint '**/**/*.js'",
     "ping-app": "node pingApp.js"
   },
   "keywords": [],
   "author": "vitorsilvalima <vitor.lima2@fatec.sp.gov.br>",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.13.0",
     "moment": "^2.20.1",
     "net": "^1.0.2",
     "pg": "6",
