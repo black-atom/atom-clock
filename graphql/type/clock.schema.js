@@ -1,52 +1,57 @@
-const graphql = require('graphql');
+const {
+  GraphQLInt,
+  GraphQLString,
+  GraphQLObjectType,
+  GraphQLBoolean,
+} = require('graphql');
 const { addressType } = require('./address.schema');
 const { getModel } = require('../../database/db');
 
 const Address = getModel('Address');
 
-const clockType = new graphql.GraphQLObjectType({
+const clockType = new GraphQLObjectType({
   name: 'ClockType',
   fields: {
     id: {
-      type: graphql.GraphQLInt,
+      type: GraphQLInt,
     },
     host: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     companyId: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     operator: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     imeiChip: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     numberSeal: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     moduleVersion: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     moduleNumber: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     port: {
-      type: graphql.GraphQLInt,
+      type: GraphQLInt,
     },
     isUp: {
-      type: graphql.GraphQLBoolean,
+      type: GraphQLBoolean,
     },
     interval: {
-      type: graphql.GraphQLInt,
+      type: GraphQLInt,
     },
     errorCount: {
-      type: graphql.GraphQLInt,
+      type: GraphQLInt,
     },
     lastTested: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
-    address: {
+    Address: {
       type: addressType,
       resolve: async ({ id }) => {
         const address = await Address.findOne({ where: { RelogioId: id } });

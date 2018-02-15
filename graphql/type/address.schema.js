@@ -1,37 +1,42 @@
-const graphql = require('graphql');
+const {
+  GraphQLInt,
+  GraphQLString,
+  GraphQLObjectType,
+  GraphQLFloat,
+} = require('graphql');
 
-const addressType = new graphql.GraphQLObjectType({
+const addressType = new GraphQLObjectType({
   name: 'addressClock',
   fields: {
     id: {
-      type: graphql.GraphQLInt,
+      type: GraphQLInt,
     },
     RelogioId: {
-      type: graphql.GraphQLInt,
+      type: GraphQLInt,
     },
     street: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     city: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     complement: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     state: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     zipCode: {
-      type: graphql.GraphQLString,
+      type: GraphQLString,
     },
     number: {
-      type: graphql.GraphQLString,
+      type: GraphQLInt,
     },
     longitude: {
-      type: graphql.GraphQLInt,
+      type: GraphQLFloat,
     },
     lagitude: {
-      type: graphql.GraphQLInt,
+      type: GraphQLFloat,
     },
   },
 });
