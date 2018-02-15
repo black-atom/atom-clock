@@ -1,5 +1,8 @@
 const graphql = require('graphql');
 const { addressType } = require('./address.schema');
+const { getModel } = require('../../database/db');
+
+const Address = getModel('Address');
 
 const clockType = new graphql.GraphQLObjectType({
   name: 'ClockType',
@@ -45,6 +48,10 @@ const clockType = new graphql.GraphQLObjectType({
     },
     address: {
       type: addressType,
+      resolve: async ({ id }) => {
+        const address = await Address.findOne({ where: { RelogioId: id } });
+        return address;
+      },
     },
   },
 });

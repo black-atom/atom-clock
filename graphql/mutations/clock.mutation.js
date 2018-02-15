@@ -14,7 +14,7 @@ const createClockMutation = {
     },
   },
   resolve: async (obj, { clockInput: ClockData }) => {
-    const newClock = await Relogio.create(ClockData, { includes: [Address] });
+    const newClock = await Relogio.create(ClockData, { include: [Address] });
     return newClock;
   },
 };

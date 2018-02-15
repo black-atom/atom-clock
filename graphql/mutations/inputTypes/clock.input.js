@@ -36,7 +36,7 @@ const clockInput = new GraphQLInputObjectType({
     moduleNumber: {
       type: GraphQLNonNull(GraphQLString),
     },
-    address: {
+    Address: {
       type: GraphQLNonNull(addressInput),
     },
   },

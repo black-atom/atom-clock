@@ -6,7 +6,7 @@ const addressType = new graphql.GraphQLObjectType({
     id: {
       type: graphql.GraphQLInt,
     },
-    relogioID: {
+    RelogioId: {
       type: graphql.GraphQLInt,
     },
     street: {
