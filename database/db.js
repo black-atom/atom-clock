@@ -35,9 +35,10 @@ db.authenticate()
   .catch(err => console.log(err));
 
 const getModel = name => db.model(name);
-const isDBReady = async () => {
+const isDBReady = async (force = false) => {
   try {
     await db.authenticate();
+    await db.sync({ force });
     return true;
   } catch (error) {
     return false;

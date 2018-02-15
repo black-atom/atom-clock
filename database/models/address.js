@@ -32,11 +32,11 @@ module.exports = (db) => {
       allowNull: true,
     },
     longitude: {
-      type: Sequelize.STRING,
+      type: Sequelize.FLOAT,
       allowNull: false,
     },
     lagitude: {
-      type: Sequelize.STRING,
+      type: Sequelize.FLOAT,
       allowNull: false,
     },
   });
