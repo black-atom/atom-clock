@@ -5,9 +5,11 @@ const {
   GraphQLBoolean,
 } = require('graphql');
 const { addressType } = require('./address.schema');
+const { companyType } = require('./company.schema');
 const { getModel } = require('../../database/db');
 
 const Address = getModel('Address');
+const { companyRequest } = require('../../utils/requestCompany');
 
 const clockType = new GraphQLObjectType({
   name: 'ClockType',
@@ -54,8 +56,24 @@ const clockType = new GraphQLObjectType({
     Address: {
       type: addressType,
       resolve: async ({ id }) => {
-        const address = await Address.findOne({ where: { RelogioId: id } });
-        return address;
+        try {
+          const address = await Address.findOne({ where: { RelogioId: id } });
+          return address;
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
+      },
+    },
+    Company: {
+      type: companyType,
+      resolve: async ({ companyId }, args, { token }) => {
+        try {
+          return await companyRequest(companyId)(token);
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
       },
     },
   },
