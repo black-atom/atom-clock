@@ -8,6 +8,7 @@ const companyType = new GraphQLObjectType({
   fields: {
     id: {
       type: GraphQLString,
+      resolve: company => company['_id'], // eslint-disable-line
     },
     nome_razao_social: {
       type: GraphQLString,

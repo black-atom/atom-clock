@@ -67,8 +67,9 @@ const clockType = new GraphQLObjectType({
     },
     Company: {
       type: companyType,
-      resolve: async ({ companyId }, args, { token }) => {
+      resolve: async ({ companyId }, args, request) => {
         try {
+          const token = request.headers.authorization || '';
           return await companyRequest(companyId)(token);
         } catch (error) {
           console.error(error);

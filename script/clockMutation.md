@@ -1,7 +1,7 @@
 mutation{
   createClock(clockInput:{
   host: "ox1.modrp.com",
-  companyId: "1",
+  companyId: "49464555000183",
   operator: "VIVO",
   imeiChip: "78974578971654",
   numberSeal: "25252525",
