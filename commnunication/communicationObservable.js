@@ -1,8 +1,8 @@
 const {
-  Subject, Subscription, AnonymousSubject, Observable,
+  Subject, Subscription, AnonymousSubject,
 } = require('rxjs/Rx');
 const net = require('net');
-const { formatToClock, formatFromClock } = require('../utils/formatToClock');
+const { formatToClock } = require('../utils/formatToClock');
 
 class SocketSubject extends AnonymousSubject {
   constructor(host, port) {

@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  postgres-service:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres-clock:/var/lib/postgresql/data
+
+  ping-service:
+    image: "node:8-alpine"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=postgres-service
+    links:
+        - postgres-service
+    volumes:
+      - ../:/home/node/app
+    command: "npm run ping-app"
+
+volumes:
+  postgres-clock:
